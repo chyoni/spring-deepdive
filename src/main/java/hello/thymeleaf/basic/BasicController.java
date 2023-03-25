@@ -33,6 +33,21 @@ public class BasicController {
         return "basic/text-unescaped";
     }
 
+    @GetMapping("/loop")
+    public String each(Model model) {
+        addUser(model);
+        return "basic/loop";
+    }
+
+    private void addUser(Model model) {
+        List<User> list = new ArrayList<>();
+        list.add(new User("UserA", 10));
+        list.add(new User("UserB", 20));
+        list.add(new User("UserA", 30));
+
+        model.addAttribute("users", list);
+    }
+
     @GetMapping("/variable")
     public String variable(Model model) {
         User userA = new User("userA", 10);
